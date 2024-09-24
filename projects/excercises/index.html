@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        p{
+            width:100%;
+            margin:0 auto;
+        }
+
+        .down{
+            display: inline-block;
+            color: blue;
+            font-size:20vw;
+            margin:5px;
+            transition:1s cubic-bezier(0.075, 0.82, 0.165, 1);
+        }
+
+        .down:hover{
+            color:red;
+            transform: translateY(10px);
+            font-size:30vw;
+        }
+
+        img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <p id="text">
+        America
+    </p>
+    <!-- <a href="https://www.wikipedia.org" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/21/Ganymede_-_Perijove_34_Composite.png/800px-Ganymede_-_Perijove_34_Composite.png"></a> -->
+    <script>
+        function downward() {
+            let element = document.querySelector("#text");
+            console.log(element.innerHTML.length);
+            console.log(element);
+            let temp = "";
+            let i = 0;
+            let j = 0;
+            for (let letter of element.innerText) {
+                temp += `<span class="down" style="transform: translateY(${j}px)">${letter}</span>`;
+                i++;
+                // j+=10;
+            }
+            element.innerHTML = temp;
+        }
+        downward();
+    </script>
+</body>
+</html>

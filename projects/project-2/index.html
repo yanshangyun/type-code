@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-color:rgb(239, 239, 239);
+            margin-top:50px;
+            /* overflow-x:hidden; */
+        }
+
+        .grey-box{
+            background-color:rgb(210, 210, 210);
+            box-shadow: inset 0.2em 0.2em 0.2em 0 rgba(255,255,255,0.5), inset -0.2em -0.2em 0.2em 0 rgba(0,0,0,0.5);
+            padding:10px;
+            width:400px;
+            position:absolute;
+        }
+
+        .header-image{
+            position:absolute;
+            top:0;
+        }
+
+        .center{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+        }
+
+        table{
+            font-weight:normal;
+        }
+    </style>
+</head>
+<body>
+    <div class="center">
+        <img src="starl.gif" class="gif">
+    </div>
+    <h1 style="margin:auto; text-align:center">
+        What the ephemerality of the Web means for your hyperlinks
+    </h1>
+    <div class="center">
+        <img src="starl.gif" class="gif">
+    </div>
+    <p>
+        <ol>
+            <li>Two million hyperlinks</li>
+            <li>Rot across sections</li>
+            <li>Content drift</li>
+            <li>The Path forward</li>
+        </ol>
+    </p>
+    <div class="grey-box" style="left:30%; right:20%; bottom:10%; top:30%; z-index:99; height:120px">
+        <p>
+            Hyperlinks are a powerful tool for journalists and their readers. Diving deep into the context of an article is just a click away. But hyperlinks are a double-edged sword; for all of the internet’s boundlessness, what’s found on the Web can also be modified, moved, or entirely vanished.
+        </p>
+    </div>
+    <div class="grey-box" style="right:20%; bottom:10%; top:40%; z-index:99; height:820px">
+        <p>
+            The fragility of the Web poses an issue for any area of work or interest that is reliant on written records. Loss of reference material, negative SEO impacts, and malicious hijacking of valuable outlinks are among the adverse effects of a broken URL. More fundamentally, it leaves articles from decades past as shells of their former selves, cut off from their original sourcing and context. And the problem goes beyond journalism. In a 2014 study, for example, researchers (including some on this team) found that nearly half of all hyperlinks in Supreme Court opinions led to content that had either changed since its original publication or disappeared from the internet.
+        </p>
+        <!-- <img src="earth.gif"> -->
+        <p>
+            Our team of researchers at Harvard Law School has undertaken a project to gain insight into the extent and characteristics of journalistic linkrot and content drift. We examined hyperlinks in New York Times articles, starting with the launch of the Times website in 1996 up through mid-2019, developed on the basis of a data set provided to us by the Times. The substantial linkrot and content drift we found here reflect the inherent difficulties of long-term linking to pieces of a volatile Web. The Times in particular is a well-resourced standard-bearer for digital journalism, with a robust institutional archiving structure. Their interest in facing the challenge of linkrot indicates that it has yet to be understood or comprehensively addressed across the field.
+        </p>
+        <p>
+            The data set of links on which we built our analysis was assembled by Times software engineers who extracted URLs embedded in archival articles and packaged them with basic article metadata such as section and publication date. We measured linkrot by writing a script to visit each of the unique “deep” URLs in the data set and log HTTP response codes, redirects, and server timeouts. On the basis of this analysis, we labeled each link as being “rotted” (removed or unreachable) or “intact” (returning a valid page).
+        </p>
+    </div>
+    <div class="grey-box" style="left:20%; right:30%; bottom:10%; top:80%; height:820px">
+        <!-- <img src="two-million-hyperlinks.gif" class="header-image" style="top:0; left:-20%"> -->
+        <b>Two Million Hyperlinks</b>
+        <p>
+            We found that of the 553,693 articles within the purview of our study––meaning they included URLs on nytimes.com––there were a total of 2,283,445 hyperlinks pointing to content outside of nytimes.com. Seventy-two percent of those were “deep links” with a path to a specific page, such as example.com/article, which is where we focused our analysis (as opposed to simply example.com, which composed the rest of the data set).
+        </p>
+        <p>
+            Of these deep links, 25 percent of all links were completely inaccessible. Linkrot became more common over time: 6 percent of links from 2018 had rotted, as compared to 43 percent of links from 2008 and 72 percent of links from 1998. Fifty-three percent of all articles that contained deep links had at least one rotted link. 
+        </p>
+    </div>
+    <div class="grey-box" style="bottom:-1000px; left:400px; left:35%; z-index:99">
+        <!-- <img src="rot-across-sections.gif" class="header-image"> -->
+        <b>Rot Across Sections</b>
+        <p>
+            Certain sections of the Times displayed much higher rates of rotted URLs. Links in the Sports section, for example, demonstrate a relative rot rate of about 36 percent, as opposed to 13 percent for The Upshot. This difference has to do, in large part, with time. The average age of a link in The Upshot is 1,450 days, as opposed to 3,196 days in the Sports section.
+        </p>
+        <p>
+            To detect how much these chronological differences alone account for variation in rot rate across sections, we developed a metric, Relative Rot Rate. It allows us to see whether a section has suffered proportionally more or less linkrot than the Times overall. Of the fifteen sections with the most articles, the Health section had the lowest RRR figures, falling about 17 percent below the baseline linkrot frequency. The Travel section had the highest rot rate, with more than 17 percent of links appearing in the section’s articles having rotted.
+        </p>
+        <p>
+            A section that reports heavily on government affairs or education might be disadvantaged by the fact that deep links to domains like .gov or .edu show higher rates of rot. These URLs are volatile by design: whitehouse.gov will always have the same URL but will fundamentally change in both content and structure with each new administration. It is precisely because their domains are fixed that their deep links are fragile. 
+        </p>
+    </div>
+    <div class="grey-box" style="top:120%; left:5%; right:40%">
+        <!-- <img src="content-drift.gif" class="header-image"> -->
+        <b>Content Drift</b>
+        <p>
+            Of course, returning a valid page isn’t the same thing as returning the page as seen by the author who originally included the link in an article. Linkrot’s partner in content drift can make the content at the end of a URL misleading or dramatically divergent from the original linker’s intentions. For example, a 2008 article about a congressional race references a member of the New York City Council and links to what had been his page on the council site. Today, clicking on the same link would lead you to the district’s current council member’s website.
+        </p>
+        <p>
+            To identify the prevalence of content drift, we conducted a human review of 4,500 URLs sampled at random from the URLs that our script had labeled as intact. For the purposes of this review, we defined a link that had suffered from content drift as a URL used in a Times article that did not point to the relevant information that the original article was referring to when it was published. On the basis of this analysis, reviewers marked each URL in the sample as being “intact” or “drifted.”
+        </p>
+        <p>
+            Thirteen percent of intact links from that sample of 4,500 had drifted significantly since the Times published them. Four percent of reachable links published in articles from 2019 had drifted, as compared to 25 percent of reachable links from 2009. 
+        </p>
+    </div>
+    <div class="grey-box" style="top:140%; right:5%;">
+        <!-- <img src="path-forward.gif" class="header-image"> -->
+        <b>The Path Forward</b>
+        <p>
+            Linkrot and content drift at this scale across the New York Times is not a sign of neglect, but rather a reflection of the state of modern online citation. The rapid sharing of information through links enhances the field of journalism. That it is being compromised by the fundamental volatility of the Web points to the need for new practices, workflows, and technologies.
+        </p>
+        <p>
+            Retroactive options––or mitigation––are limited, but still important to consider. The Internet Archive hosts an impressive, though far from comprehensive, assortment of snapshots of websites. It’s best understood as a means of patching incidents of linkrot and content drift. Publications could work to improve the visibility of the Internet Archive and other services like it as a tool for readers, or even automatically replace broken links with ones to archives, as the Wikipedia community has done.
+        </p>
+        <p>
+            Still, more fundamental measures are necessary. Journalists have adopted some proactive solutions, such as screenshotting and storing static images of websites. But it doesn’t solve for the reader who comes across an inaccessible link. 
+        </p>
+        <p>
+            New frameworks for considering the purpose of a given link will help bolster the intertwined processes of journalism and research. Before linking, for instance, journalists should decide whether they want a dynamic link to a volatile Web––risking rot or content drift, but enabling further exploration of a topic––or a frozen piece of archival material, fixed to represent exactly what the author would have seen at the time of writing. Newsrooms––and the people who support them––should build technical tools to streamline this more sophisticated linking process, giving writers maximum control over how their pieces interact with other Web content.
+        </p>
+    </div>
+    <!-- <img src="star_ani.gif" style="position:absolute; bottom:-120%; left:20%"> -->
+</body>
+</html>
