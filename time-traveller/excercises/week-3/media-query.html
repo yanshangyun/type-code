@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week 3</title>
+    <style>
+        h1{
+            font-size:100px;
+            transition:0.5s cubic-bezier(.50,0,.25,1);
+            position:fixed;
+            top:0;
+            line-height:0;
+            opacity:100%;
+        }
+
+        h2{
+            font-size:20px;
+            transition:0.5s cubic-bezier(.50,0,.25,1);
+            position:fixed;
+            bottom:0;
+            line-height:0;
+            opacity:100%;
+        }
+
+        p{
+            line-height:0em;
+            transition:0.5s cubic-bezier(.50,0,.25,1);
+        }
+
+        @media only screen and (max-width:500px){
+            h1{
+                font-size:50px;
+                opacity:50%;
+                top:calc(50% - 1em);
+            }
+
+            h2{
+                font-size:50px;
+                opacity:50%;
+                bottom:calc(50% - 0.5em);
+            }
+
+            p{
+                line-height:1em;
+            }
+        }
+
+        @media only screen and (max-width:400px){
+            h1{
+                font-size:20px;
+                opacity:100%;
+                top:calc(100% - 1.5em);
+            }
+            h2{
+                font-size:100px;
+                opacity:100%;
+                bottom:calc(100% - 1.5em);
+            }
+
+            p{
+                line-height:2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello!</h1>
+    <h2>Goodbye.</h2>
+    <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus orci neque, gravida a vestibulum ac, varius eget neque. Maecenas ut mauris fringilla, consectetur elit ac, tempus neque. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aenean nec arcu dictum, volutpat turpis ac, commodo metus. Integer rhoncus turpis quis nisi semper, non tempus nunc venenatis. Donec fringilla auctor ipsum, ut tempus arcu fringilla vel. Suspendisse potenti. Sed commodo, ex vel ultrices pretium, libero nulla gravida metus, sit amet porttitor eros quam eget nulla. Etiam in sollicitudin libero. Fusce vestibulum erat vitae turpis ullamcorper, nec vulputate justo suscipit. Nam vestibulum iaculis neque.
+    </p>
+</body>
+</html>

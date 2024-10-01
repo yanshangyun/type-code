@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Traveller</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        .container{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .window{
+            width:500px;
+            height:200px;
+            background-color:white;
+            border:rgb(113, 113, 113) solid 0.5px;
+            border-radius:4px;
+            overflow:hidden;
+            box-shadow:0 2px 10px rgb(182, 182, 182);
+            transform:translateY(-5vh);
+            display: flex; /* Added */
+            flex-direction: column; /* Added */
+        }
+
+        .top-bar{
+            width:100%;
+            height:25px;
+            background-image:linear-gradient(rgba(197, 197, 197, 0.265) 0px, rgba(163, 163, 163, 0.64) 40px);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .content{
+            width:100%;
+            padding:20px;
+            flex-grow: 1; /* Added */
+            display: flex; /* Added */
+            flex-direction: column; /* Added */
+            justify-content: space-between; /* Added */
+        }
+
+        h1{
+            font-size:15px;
+        }
+
+        p{
+            font-size:13px;
+        }
+
+        a{
+            text-decoration:none;
+            color:black;
+        }
+
+        button{
+            background-image:linear-gradient(hsl(0 0% 100% / 0.85), transparent 10px),
+                linear-gradient(hsl(0 0% 100% / 0.25) 10px, transparent 10px),
+                radial-gradient(
+                    circle at 10px 5px,
+                    hsl(0 0% 100% / 0.25) 5px,
+                    transparent 5px
+                ),
+                radial-gradient(
+                    circle at 0px 5px,
+                    hsl(0 0% 100% / 0.25) 5px,
+                    transparent 5px
+                ),
+                linear-gradient(hsl(0, 0%, 55%), hsl(0, 0%, 100%));
+                /* linear-gradient(hsl(213, 96%, 44%), hsl(192, 95%, 92%)); */
+            padding:0.1em 1em;
+            background-size:100%, calc(100% - 20px), 10px 10px, 10px 10px, 100%;
+            background-position:top, top center, top left, top right, center;
+            background-repeat:no-repeat;
+            border:rgb(113, 113, 113) solid 0.5px;
+            border-radius:100vw;
+            position:relative;
+            box-shadow:0 2px 5px hsl(0, 0%, 77%);
+            color:black;
+            transition:0.2s cubic-bezier(0.2,0,0.1,1);
+        }
+
+        button:hover{
+            color:white;
+            background-image:linear-gradient(hsl(0 0% 100% / 0.85), transparent 10px),
+                linear-gradient(hsl(0 0% 100% / 0.25) 10px, transparent 10px),
+                radial-gradient(
+                    circle at 10px 5px,
+                    hsl(0 0% 100% / 0.25) 5px,
+                    transparent 5px
+                ),
+                radial-gradient(
+                    circle at 0px 5px,
+                    hsl(0 0% 100% / 0.25) 5px,
+                    transparent 5px
+                ),
+                linear-gradient(hsl(225, 100%, 32%) 0%, hsl(213, 96%, 44%) 50%, hsl(192, 95%, 92%));;
+            box-shadow:0 2px 10px hsl(229, 62%, 66%);
+        }
+
+        button:hover a{
+            color:white;
+            text-shadow:0 0 5px hsl(214, 100%, 35%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="window">
+            <div class="top-bar">
+                <p>Ryan Yan / Type + Code Fall 2024</p>
+            </div>
+            <div class="content">
+                <div style="display:flex; flex-direction:row; gap:20px">
+                    <img src="time-machine.png" style="width:80px; height:80px;">
+                    <div style="display:flex; flex-direction:column; gap:10px;">
+                        <h1>Project 1: Time Traveller</h1>
+                        <p style="color:grey">The following webpages use the article, <a href="https://www.cjr.org/analysis/linkrot-content-drift-new-york-times.php" target="_blank" style="color:grey; text-decoration:underline">"What the ephemerality of the Web means for your hyperlinks"</a> by John Bowers, Clare Stanton, and Jonathan Zittrain</p>
+                    </div>
+                </div>
+                <div style="display:flex; flex-direction:row; gap:10px; justify-content: flex-end;">
+                    <button><a href="1">Pure HTML</a></button>
+                    <button><a href="2">CSS Absolute</a></button>
+                    <button><a href="3">CSS Flex</a></button>
+                </div>
+            </div>
+        </div>        
+    </div>
+</body>
+</html>
