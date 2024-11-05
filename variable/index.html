@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Reservation Sans</title>
+    <style>
+        @font-face{
+            font-family:"text-sans";
+            src:url(text-sans.ttf) format("truetype");
+            font-weight:0 500;
+        }
+
+        body{
+            font-family:"text-sans";
+        }
+
+        h1{
+            font-weight:1;
+        }
+
+        #editor{
+            font-family:"text-sans";
+            font-size:24px;
+            margin-top:10px;
+            border:1px solid #ddd;
+            padding:10px;
+            min-height:100px;
+            outline:none;
+        }
+
+        #wghtValueDisplay{
+            font-size:18px;
+            margin-top:10px;
+            color:red;
+        }
+
+        .letter{
+            display:inline-block;
+            transition:all 0.2s ease;
+            animation:appear 0.8s cubic-bezier(.09,.66,.1,.99);
+        }
+
+        @keyframes appear{
+            0%{
+                filter:blur(5px);
+                transform:translateX(5px) scaleX(0);
+            }
+            100%{
+                transform:translateX(0px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>reservation sans</h1>
+    <p style="font-weight:1">the human eye is very receptive to differences in "brightness within a text body." therefore, one can differentiate between types of emphasis according to whether the emphasis changes the "blackness" of text, sometimes referred to as typographic color.</p>
+    <div id="wghtValueDisplay">awkwardness...</div>
+    <div id="editor" contenteditable="true"></div>
+
+    <script>
+        //help from gpt
+        const editor = document.getElementById('editor');
+        const wghtValueDisplay = document.getElementById('wghtValueDisplay');
+        let lastTime = Date.now(); //current time
+
+        editor.addEventListener('keydown', (event) => {
+            if (event.key.length === 1) { //when the user inputs one character...
+                event.preventDefault(); //prevent the default text input behavior
+
+                const currentTime = Date.now();
+                const timeDiff = currentTime - lastTime; //calculate time between keypress
+                lastTime = currentTime;
+
+                let wghtValue;
+
+                //calculate wght based on typing speed, time between keypress
+                if (timeDiff >= 500) {
+                    wghtValue = 1; //minimum weight value of 1
+                } else {
+                    wghtValue = Math.max(1, 500 - ((timeDiff - 86) * 7.8125)); //help from gpt
+                }
+
+                //round to whole number
+                wghtValue = Math.round(wghtValue);
+                //console.log(wghtValue);
+
+                //display of current wght value
+                wghtValueDisplay.textContent = `${wghtValue}`;
+
+                //colours
+                let greyValue = Math.round(175 - ((wghtValue - 1) / 499) * 128);
+                let color = `rgb(${greyValue}, ${greyValue}, ${greyValue})`;
+
+                //create span for character with wght value
+                if (event.key === " ") { //if key is space...
+                    const spaceNode = document.createTextNode(" "); //dont wrap in span
+
+                    editor.appendChild(spaceNode);
+                } else { //every other key pressed...
+                    const span = document.createElement('span'); //create new span element
+                    span.className = 'letter'; //add class to span for styling
+                    span.textContent = event.key; //set content to pressed key
+                    span.style.fontWeight = wghtValue; //set wght of letter
+                    span.style.color = color; //set color
+                    //span.style.textShadow = `0 0 2px ${color}`; //set drop shadow
+
+                    //add 'span' into the editor div
+                    editor.appendChild(span);
+                }                
+
+                //move the cursor to the end, help from gpt
+                const range = document.createRange(); //create new range object to control cursor position
+                const sel = window.getSelection(); //access current cursor position
+                range.setStartAfter(editor.lastChild); //set range start to after last created child
+                range.collapse(true); //collapse cursor selection range into a singular point, instead of text selection
+                sel.removeAllRanges(); //clears previous existing selections or positions
+                sel.addRange(range); //applies new range, move cursor to the end of the newly typed letter
+            }
+        });
+    </script>
+</body>
+</html>
