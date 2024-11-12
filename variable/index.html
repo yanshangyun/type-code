@@ -6,34 +6,64 @@
         @font-face{
             font-family:"text-sans";
             src:url(text-sans.ttf) format("truetype");
-            font-weight:0 500;
+            font-variation-settings:'wght' 1;
         }
 
         body{
             font-family:"text-sans";
+            margin:0;
+            height:100vh;
+            align-items:center;
+            justify-content:center;
         }
 
         h1{
-            font-weight:1;
+            font-variation-settings:'wght' 0;
+            font-weight:normal;
         }
 
-        #editor{
+        .container{
+            width:100%;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            padding:50px;
+        }
+
+        #conversation{
+            margin-top:200px;
+            width:50%;
+            display:flex;
+            flex-direction:column;
+            gap:20px;
+            max-width:600px;
+            min-width:400px;
+            /* box-shadow:0 0 10px rgb(218, 218, 218); */
+            border:rgb(226, 226, 226) 1px solid;
+            padding:50px;
+        }
+
+        .input{
             font-family:"text-sans";
-            font-size:24px;
-            margin-top:10px;
-            border:1px solid #ddd;
-            padding:10px;
-            min-height:100px;
-            outline:none;
+            background-color:white;
+            align-self:flex-end;
+            min-width:100%;
+            /* box-shadow:0 0 10px rgb(218, 218, 218); */
+            border:rgb(226, 226, 226) 1px solid;
+            margin-top:50px;
+            box-sizing:border-box;
         }
 
-        #wghtValueDisplay{
+        .wghtValueDisplay{
             font-size:18px;
             margin-top:10px;
             color:red;
+            display:none;
         }
 
         .letter{
+            -webkit-font-smoothing: antialiased;
             display:inline-block;
             transition:all 0.2s ease;
             animation:appear 0.8s cubic-bezier(.09,.66,.1,.99);
@@ -48,73 +78,263 @@
                 transform:translateX(0px);
             }
         }
+
+        .text-bubble{
+            padding:10px;
+            border-radius:100px;
+            display:inline;
+            width:auto;
+            padding-left:20px;
+            padding-right:20px;
+        }
+
+        .you{
+            background-color:rgb(204, 204, 204);
+            font-weight:1;
+            align-self:flex-start;
+            max-width:500px;
+            animation:send 0.5s cubic-bezier(0,.5,.5,1);
+        }
+
+        .me{
+            background-color:rgb(231, 231, 231);
+            font-weight:1;
+            align-self:flex-end;
+            max-width:500px;
+        }
+
+        @keyframes send{
+            0%{
+                opacity:0;
+                transform:translateY(10px);
+                filter:blur(5px);
+            }
+            100%{
+                opacity:1;
+                transform:translateY(0);
+                filter:blur(0px);
+            }
+        }
+
+        /*character grid*/
+
+        .flex-container {
+            cursor:default;
+            display:flex;
+            flex-wrap:wrap;
+            width:100%;
+        }
+
+        .grid-container {
+            width:50%;
+            display:grid;
+            align-items:center;
+            grid-gap:10px;
+            grid-template-columns:repeat(auto-fit, minmax(50px, 1fr));
+        }
+
+        .char{
+            width:100%;
+            font-size:20px;
+            text-align:center;
+            transition:all 0.3s ease;
+        }
+
+        .char:hover{
+            transform:scale(2);
+        }
+
+        .hover-container {
+            position:sticky;
+            display:flex;
+            font-size:10pt;
+            align-items:center;
+            justify-content:center;
+            width:50%;
+            height:100%;
+            top:15%;
+        }
+
+        .hover-char{
+            display:flex;
+            font-size:30vw;
+            animation-name:grow;
+            animation-duration:2s;
+            animation-iteration-count:infinite;
+            animation-direction:alternate;
+            animation-timing-function:cubic-bezier(.85,0,.3,1);
+        }
+
+        @keyframes grow{
+            from{
+                font-variation-settings:'wght' 500;
+                color:white;
+                text-shadow:0 0 10px rgb(186, 186, 186);
+            }
+            to{
+                font-variation-settings:'wght' 1;
+                color:white;
+                text-shadow:0 0 2px rgb(186, 186, 186);
+            }
+        }
     </style>
 </head>
 <body>
-    <h1>reservation sans</h1>
-    <p style="font-weight:1">the human eye is very receptive to differences in "brightness within a text body." therefore, one can differentiate between types of emphasis according to whether the emphasis changes the "blackness" of text, sometimes referred to as typographic color.</p>
-    <div id="wghtValueDisplay">awkwardness...</div>
-    <div id="editor" contenteditable="true"></div>
-
+    <div class="container">
+        <div id="conversation">
+            <span class="text-bubble you">tell me you care</span>
+            <span class="text-bubble input" contenteditable="true" spellcheck="false"></span>
+        </div>
+        <!-- <div class="wghtValueDisplay">awkwardness...</div>   -->
+        <div class="flex-container">
+            <div class="grid-container">
+            </div>
+            <div class="hover-container">
+                <div class="hover-char"></div>
+            </div>
+        </div>
+    </div>
     <script>
-        //help from gpt
-        const editor = document.getElementById('editor');
-        const wghtValueDisplay = document.getElementById('wghtValueDisplay');
-        let lastTime = Date.now(); //current time
+        //conversation
+        const conversation = document.getElementById('conversation');
 
-        editor.addEventListener('keydown', (event) => {
-            if (event.key.length === 1) { //when the user inputs one character...
-                event.preventDefault(); //prevent the default text input behavior
+        //"your" messages
+        const responses = [
+            "you said that last time too",
+            "mm",
+            "why are you talking like that",
+            "your tone is weird",
+            "are you anxious"
+        ];
 
-                const currentTime = Date.now();
-                const timeDiff = currentTime - lastTime; //calculate time between keypress
-                lastTime = currentTime;
+        let responseIndex = 0; //begin at the first
 
-                let wghtValue;
+        //back and forth
+        function addNewInputBubble(event) {
+            if (event.key === "Enter") { //when enter is pressed...
+                event.preventDefault();
 
-                //calculate wght based on typing speed, time between keypress
-                if (timeDiff >= 500) {
-                    wghtValue = 1; //minimum weight value of 1
-                } else {
-                    wghtValue = Math.max(1, 500 - ((timeDiff - 86) * 7.8125)); //help from gpt
-                }
+                const currentInput = event.target;
 
-                //round to whole number
-                wghtValue = Math.round(wghtValue);
-                //console.log(wghtValue);
+                //check if current input is empty
+                if (currentInput.textContent.trim() === "") return;
 
-                //display of current wght value
-                wghtValueDisplay.textContent = `${wghtValue}`;
+                //convert the current input bubble to a sent message (non-editable)
+                currentInput.classList.remove("input"); //remove input class
+                currentInput.classList.add("me"); //add "me" class
+                currentInput.contentEditable = "false"; //no longer editable
+                
+                //create a new input bubble
+                const newInput = document.createElement("span");
+                newInput.className = "text-bubble input";
+                newInput.setAttribute('contenteditable', 'true');
+                newInput.setAttribute('spellcheck', 'false');
+                newInput.setAttribute('autocomplete', 'off');
+                newInput.setAttribute('autocorrect', 'off');
+                newInput.setAttribute('autocapitalize', 'off'); 
 
-                //colours
-                let greyValue = Math.round(175 - ((wghtValue - 1) / 499) * 128);
-                let color = `rgb(${greyValue}, ${greyValue}, ${greyValue})`;
+                conversation.appendChild(newInput); //add new input message to conversation div
 
-                //create span for character with wght value
-                if (event.key === " ") { //if key is space...
-                    const spaceNode = document.createTextNode(" "); //dont wrap in span
+                setTimeout(() =>{
+                    //insert a "you" response after the user message
+                    const youMessage = document.createElement("span");
+                    youMessage.className = "text-bubble you"; //add you message class
+                    youMessage.textContent = responses[responseIndex]; //call from array of responses
+                    responseIndex = (responseIndex + 1) % responses.length; //loop through responses
 
-                    editor.appendChild(spaceNode);
-                } else { //every other key pressed...
-                    const span = document.createElement('span'); //create new span element
-                    span.className = 'letter'; //add class to span for styling
-                    span.textContent = event.key; //set content to pressed key
-                    span.style.fontWeight = wghtValue; //set wght of letter
-                    span.style.color = color; //set color
-                    //span.style.textShadow = `0 0 2px ${color}`; //set drop shadow
+                    conversation.insertBefore(youMessage, newInput); //add "you" message to conversation div, above input field
 
-                    //add 'span' into the editor div
-                    editor.appendChild(span);
-                }                
-
-                //move the cursor to the end, help from gpt
-                const range = document.createRange(); //create new range object to control cursor position
-                const sel = window.getSelection(); //access current cursor position
-                range.setStartAfter(editor.lastChild); //set range start to after last created child
-                range.collapse(true); //collapse cursor selection range into a singular point, instead of text selection
-                sel.removeAllRanges(); //clears previous existing selections or positions
-                sel.addRange(range); //applies new range, move cursor to the end of the newly typed letter
+                    //refocus on the new input bubble
+                    newInput.focus();
+                }, 1000);
             }
+        }
+
+        //variable letters
+        conversation.addEventListener("keydown", function(event) {
+            if (event.target.classList.contains("input")) {
+                addNewInputBubble(event);
+
+                if (event.key.length === 1) { //when the user inputs one character...
+                    event.preventDefault(); //prevent the default text input behavior
+
+                    const input = event.target;
+                    let lastTime = input.getAttribute('data-last-time') || Date.now();
+                    const currentTime = Date.now();
+                    const timeDiff = currentTime - lastTime; //calculate time between keypress
+                    input.setAttribute('data-last-time', currentTime); //update last time
+
+                    let wghtValue;
+
+                    //calculate wght based on typing speed, time between keypress
+                    if (timeDiff >= 500) {
+                        wghtValue = 1; //minimum weight value of 1
+                    } else {
+                        wghtValue = Math.min(500, Math.max(1, 500 - ((timeDiff - 92) * 7.3382))); //help from gpt
+                    }
+
+                    //round to whole number
+                    wghtValue = Math.round(wghtValue);
+
+                    //create span for character with wght value
+                    if (event.key === " ") { //if key is space...
+                        const spaceNode = document.createTextNode(" "); //dont wrap in span
+                        input.appendChild(spaceNode);
+                    } else { //every other key pressed...
+                        const span = document.createElement('span'); //create new span element
+                        span.className = 'letter'; //add letter class to span
+                        span.textContent = event.key; //set content to pressed key
+                        span.style.fontVariationSettings = `'wght' ${wghtValue}`; //set weight of letter
+
+                        //add 'span' into input div
+                        input.appendChild(span);
+                    }
+
+                    //move the cursor to the end, help from gpt
+                    const range = document.createRange(); //create new range object to control cursor position
+                    const sel = window.getSelection(); //access current cursor position
+                    range.setStartAfter(input.lastChild); //set range start to after last created child
+                    range.collapse(true); //collapse cursor selection range into a singular point, instead of text selection
+                    sel.removeAllRanges(); //clears previous existing selections or positions
+                    sel.addRange(range); //applies new range, move cursor to the end of the newly typed letter
+                }
+            }
+        });
+
+        //variable matrix
+
+        //all letters
+        const ranges = [
+            [65, 90], //capital letters
+            [97, 122], //lowercase letters
+            [48, 57], //numbers
+        ];
+        
+        //create array to hold the character elements
+        const chars = [];
+        
+        //generate the character elements
+        for (const [start, end] of ranges) {
+            for (let i = start; i <= end; i++) {
+                const glyph = String.fromCharCode(i);
+                chars.push(`<div class="char">${glyph}</div>`); //create
+            }
+        }
+        
+        //add character elements to the grid container
+        const gridContainer = document.querySelector('.grid-container');
+        gridContainer.innerHTML = chars.join('');
+        
+        //big letter
+        const previewChar = document.querySelector('.hover-char');
+        gridContainer.addEventListener('mouseover', (event) => {
+            const target = event.target;
+            if (target.classList.contains('char')) { //if hovering on char...
+                previewChar.textContent = target.textContent; //display char
+            }
+        });
+        gridContainer.addEventListener('mouseout', () => {
+            previewChar.textContent = '';
         });
     </script>
 </body>
