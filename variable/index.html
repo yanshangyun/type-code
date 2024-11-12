@@ -186,13 +186,13 @@
             <span class="text-bubble input" contenteditable="true" spellcheck="false"></span>
         </div>
         <!-- <div class="wghtValueDisplay">awkwardness...</div>   -->
-        <div class="flex-container">
+        <!-- <div class="flex-container">
             <div class="grid-container">
             </div>
             <div class="hover-container">
                 <div class="hover-char"></div>
             </div>
-        </div>
+        </div> -->
     </div>
     <script>
         //conversation
@@ -204,7 +204,10 @@
             "mm",
             "why are you talking like that",
             "your tone is weird",
-            "are you anxious"
+            "are you anxious",
+            "ok",
+            "mm",
+            "let's just talk later"
         ];
 
         let responseIndex = 0; //begin at the first
@@ -251,6 +254,8 @@
         }
 
         //variable letters
+        const wghtDisplay = document.querySelectorAll('wghtValueDisplay');
+
         conversation.addEventListener("keydown", function(event) {
             if (event.target.classList.contains("input")) {
                 addNewInputBubble(event);
