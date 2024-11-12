@@ -28,12 +28,9 @@
             flex-direction:column;
             align-items:center;
             justify-content:center;
-            padding:50px;
         }
 
         #conversation{
-            margin-top:200px;
-            width:50%;
             display:flex;
             flex-direction:column;
             gap:20px;
@@ -42,6 +39,11 @@
             /* box-shadow:0 0 10px rgb(218, 218, 218); */
             border:rgb(226, 226, 226) 1px solid;
             padding:50px;
+        }
+
+        .conversation-wrapper{
+            margin-bottom:100px;
+            padding-top:100px;
         }
 
         .input{
@@ -116,6 +118,24 @@
             }
         }
 
+        .turn-taking{
+            font-variation-settings:'wght' 1;
+            animation:subtle 10s linear infinite alternate;
+        }
+
+        @keyframes subtle{
+            0%{
+                font-variation-settings:'wght' 1;
+            }
+            100%{
+                font-variation-settings:'wght' 500;
+            }
+        }
+
+        .turn-taking-wrapper{
+            width:80%;
+        }
+
         /*character grid*/
 
         .flex-container {
@@ -181,9 +201,26 @@
 </head>
 <body>
     <div class="container">
-        <div id="conversation">
-            <span class="text-bubble you">tell me you care</span>
-            <span class="text-bubble input" contenteditable="true" spellcheck="false"></span>
+        <div class="conversation-wrapper">
+            <div id="conversation">
+                <span class="text-bubble you">tell me you care</span>
+                <span class="text-bubble input" contenteditable="true" spellcheck="false"></span>
+            </div>
+        </div>
+        <div class="turn-taking-wrapper">
+            <p class="turn-taking">
+                turn-taking is a type of organization in conversation and discourse where participants speak one at a time in alternating turns. in practice, it involves processes for constructing contributions, responding to previous comments, and transitioning to a different speaker, using a variety of linguistic and non-linguistic cues.
+    
+                while the structure is generally universal, that is, overlapping talk is generally avoided and silence between turns is minimized, turn-taking conventions vary by culture and community. conventions vary in many ways, such as how turns are distributed, how transitions are signaled, or how long the average gap is between turns.
+    
+                in many contexts, conversation turns are a valuable means to participate in social life and have been subject to competition. it is often thought that turn-taking strategies differ by gender; consequently, turn-taking has been a topic of intense examination in gender studies. while early studies supported gendered stereotypes, such as men interrupting more than women and women talking more than men, recent research has found mixed evidence of gender-specific conversational strategies, and few overarching patterns have emerged.
+                <br><br>
+                another cue associated with turn-taking is that of timing. within turn-taking, timing may cue the hearer to know that they have a turn to speak or make an utterance. due to the very nature of turn-taking and that it is dependent on the context, timing varies within a turn and may be subjective within the conversation. vocal patterns, such as pitch, specific to the individual also cue the hearer to know how the timing will play out in turn-taking.
+    
+                deborah tannen also shows timing differences in relation to turn-taking. for a particular study, she used a recording of a conversation between a group of her friends at dinner. the group included men and women from across the united states of mixed ethnicities. she concluded that while the amount of space left between speakers may differ, it differs most dramatically between people from different regions. for instance, new yorkers tend to overlap in conversation, while californians tend to leave more space between turns and sentences.
+    
+                kobin h. kendrick argues that rules and constraints that are established within a turn-taking system are done so to minimize the amount of time spent transitioning between turns. not all transitions are minimal; schlegloff found that transitions before turns that incorporate other-initiations of repair were found to be longer than other transitions.
+            </p>
         </div>
         <!-- <div class="wghtValueDisplay">awkwardness...</div>   -->
         <!-- <div class="flex-container">
