@@ -9,12 +9,18 @@
             font-variation-settings:'wght' 1;
         }
 
-        body{
+        *{
+            box-sizing:border-box;
+        }
+
+        body, html{
             font-family:"text-sans";
             margin:0;
             height:100vh;
+            width:100vw;
             align-items:center;
             justify-content:center;
+            overflow-x:hidden;
         }
 
         h1{
@@ -23,27 +29,57 @@
         }
 
         .container{
-            width:100%;
+            max-width:100vw;
+            min-height:100vh;
             display:flex;
             flex-direction:column;
             align-items:center;
             justify-content:center;
         }
 
+        .conversation-wrapper{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
         #conversation{
+            max-width:600px;
+            min-width:400px;
+            box-shadow:0 0 50px rgb(239, 239, 239);
+            /* border:rgb(226, 226, 226) 1px solid; */
+            border-radius:20px;
+            padding-top:20px;
+            padding-right:30px;
+            padding-left:30px;
+            padding-bottom:20px;
+            animation:load 2s cubic-bezier(.09,.66,.1,.99);
+            text-align:center;
+            border:rgb(226, 226, 226) 1px solid;
+        }
+
+        @keyframes load{
+            0%{
+                filter:blur(10px);
+            }
+            100%{
+                filter:blur(0px);
+            }
+        }
+
+        #texts{
             display:flex;
             flex-direction:column;
             gap:20px;
-            max-width:600px;
-            min-width:400px;
-            box-shadow:0 0 10px rgb(230, 230, 230);
-            border:rgb(226, 226, 226) 1px solid;
-            padding:50px;
         }
 
-        .conversation-wrapper{
-            margin-bottom:100px;
-            padding-top:100px;
+        .subtitle{
+            color:rgb(195, 195, 195);
+            font-size:12px;
+            font-variation-settings:'wght' 0;
+            margin-top:10px;
+            box-sizing:border-box;
         }
 
         .input{
@@ -55,6 +91,7 @@
             border:rgb(226, 226, 226) 1px solid;
             margin-top:50px;
             box-sizing:border-box;
+            text-align:left;
         }
 
         .wghtValueDisplay{
@@ -82,16 +119,31 @@
         }
 
         .text-bubble{
-            padding:10px;
+            padding:0.2em 0.8em;
             border-radius:100px;
             display:inline;
             width:auto;
-            padding-left:20px;
-            padding-right:20px;
+            border:rgb(113, 113, 113) solid 0.5px;
+            box-shadow:0 0px 4px hsl(0, 0%, 77%);
         }
 
         .you{
-            background-color:rgb(204, 204, 204);
+            background-image:linear-gradient(hsl(0 0% 100% / 0.85), transparent 10px),
+                linear-gradient(hsl(0 0% 100% / 0.25) 10px, transparent 10px),
+                radial-gradient(
+                    circle at 10px 5px,
+                    hsl(0 0% 100% / 0.25) 5px,
+                    transparent 5px
+                ),
+                radial-gradient(
+                    circle at 0px 5px,
+                    hsl(0 0% 100% / 0.25) 5px,
+                    transparent 5px
+                ),
+                linear-gradient(hsl(0, 0%, 74%), hsl(0, 0%, 100%));
+            background-size:100%, calc(100% - 20px), 10px 10px, 10px 10px, 100%;
+            background-position:top, top center, top left, top right, center;
+            background-repeat:no-repeat;
             font-weight:1;
             align-self:flex-start;
             max-width:500px;
@@ -99,7 +151,23 @@
         }
 
         .me{
-            background-color:rgb(231, 231, 231);
+            background-image:linear-gradient(hsla(0, 0%, 100%, 0.85), transparent 10px),
+                linear-gradient(hsl(0 0% 100% / 0.25) 10px, transparent 10px),
+                radial-gradient(
+                    circle at 10px 5px,
+                    hsl(0 0% 100% / 0.25) 5px,
+                    transparent 5px
+                ),
+                radial-gradient(
+                    circle at 0px 5px,
+                    hsla(0, 0%, 100%, 0.25) 5px,
+                    transparent 5px
+                ),
+                linear-gradient(hsl(208, 100%, 78%), hsl(206, 100%, 92%));
+                /* linear-gradient(hsl(213, 96%, 44%), hsl(192, 95%, 92%)); */
+            background-size:100%, calc(100% - 20px), 10px 10px, 10px 10px, 100%;
+            background-position:top, top center, top left, top right, center;
+            background-repeat:no-repeat;
             font-weight:1;
             align-self:flex-end;
             max-width:500px;
@@ -118,11 +186,27 @@
             }
         }
 
+        .turn-taking-container{
+            background:linear-gradient(to top, rgb(239, 239, 239), transparent);
+            padding:0 100px;
+            overflow-x:hidden;
+            width:100vw;;
+        }
+
+        .turn-taking-wrapper{
+            width:100%;
+            overflow-x:hidden;
+            text-align:center;
+        }
+
         .turn-taking{
             font-variation-settings:'wght' 1;
             animation:subtle 20s linear infinite alternate;
             color:white;
-            text-align:center;
+            width:100%;
+        }
+
+        .turn-taking p{
             font-size:20px;
         }
 
@@ -137,54 +221,63 @@
             }
         }
 
-        .turn-taking-wrapper{
-            width:80%;
-            margin-top:500px;
-            margin-bottom:500px;
-        }
-
         /*character grid*/
 
         .flex-container {
             cursor:default;
             display:flex;
             flex-wrap:wrap;
+            flex-direction:row;
+            justify-content:space-between;
+            align-items:center;
             width:100%;
+            height:500px;
+            margin-bottom:100px;
         }
 
         .grid-container {
-            width:50%;
+            max-width:50%;
+            max-height:100px;
             display:grid;
             align-items:center;
             grid-gap:10px;
             grid-template-columns:repeat(auto-fit, minmax(50px, 1fr));
+            margin-bottom:100px;
         }
 
         .char{
             width:100%;
+            height:50px;
+            max-height:50px;
             font-size:20px;
+            display:flex;
             text-align:center;
-            transition:all 0.3s ease;
+            justify-content:center;
+            align-items:center;
+            transform:rotateY('0deg');
+            color:white;
+            text-shadow:0 0 5px rgb(103, 103, 103);
+            transition:all 0.5s cubic-bezier(.04,.65,.25,1);
         }
 
         .char:hover{
-            transform:scale(2);
+            text-shadow:0 0 5px rgb(206, 206, 206);
+            font-size:40px;
         }
 
         .hover-container {
-            position:sticky;
             display:flex;
-            font-size:10pt;
             align-items:center;
             justify-content:center;
-            width:50%;
+            width:40%;
             height:100%;
             top:15%;
+            border-radius:30px;
         }
 
         .hover-char{
             display:flex;
-            font-size:30vw;
+            font-size:15vw;
             animation-name:grow;
             animation-duration:2s;
             animation-iteration-count:infinite;
@@ -204,44 +297,102 @@
                 text-shadow:0 0 2px rgb(186, 186, 186);
             }
         }
+
+        /* type tester */
+
+        .type-test{
+            height:100vh;
+            display:flex;
+            flex-direction:column;
+            gap:20px;
+            align-items:center;
+            justify-content:center;
+            color:white;
+            text-shadow:0 0 10px rgb(103, 103, 103);
+        }
+
+        /* Base Slider Styling */
+        .slider{
+            width:20%;
+            -webkit-appearance: none; /* Removes default styling */
+            height: 5px; /* Height of the track */
+            background:linear-gradient(to left, transparent, rgb(209, 209, 209), transparent);
+            outline: none; /* Removes focus outline */
+            border-radius: 5px; /* Rounds the track edges */
+            transition: background 0.3s ease; /* Smooth transitions */
+        }
+
+        /* Thumb Styling (the draggable part) */
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none; /* Removes default styling */
+            appearance: none;
+            background-color:white;
+            width:20px;
+            height:20px;
+            border-radius:50%;
+            cursor:pointer; /* Changes the cursor on hover */
+            box-shadow:0 0px 4px hsl(0, 0%, 77%);
+            transition:all 0.5s cubic-bezier(.04,.65,.25,1);
+        }
+
+        .slider::-webkit-slider-thumb:hover{
+            width:22px;
+            height:22px;
+            box-shadow:0 0px 10px hsl(0, 0%, 64%);
+        }
+
+        .slider::-webkit-slider-thumb:active{
+            width:15px;
+            height:15px;
+            box-shadow:0 0px 10px hsl(0, 0%, 64%);
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="conversation-wrapper">
             <div id="conversation">
-                <span class="text-bubble me">i don't know anymore</span>
+                <div class="subtitle">today</div>
+                <div id="texts">
+                    <span class="text-bubble me">...</span>
                 <span class="text-bubble you">tell me you care</span>
                 <span class="text-bubble input" contenteditable="true" spellcheck="false"></span>
+                </div>
+                <div class="subtitle">you can make mistakes.</div>
             </div>
         </div>
-        <div class="turn-taking-wrapper">
-            <p class="turn-taking">
-                turn-taking is a type of organization in conversation and discourse where participants speak one at a time in alternating turns. in practice, it involves processes for constructing contributions, responding to previous comments, and transitioning to a different speaker, using a variety of linguistic and non-linguistic cues.
-    
-                while the structure is generally universal, that is, overlapping talk is generally avoided and silence between turns is minimized, turn-taking conventions vary by culture and community. conventions vary in many ways, such as how turns are distributed, how transitions are signaled, or how long the average gap is between turns.
-    
-                in many contexts, conversation turns are a valuable means to participate in social life and have been subject to competition. it is often thought that turn-taking strategies differ by gender; consequently, turn-taking has been a topic of intense examination in gender studies. while early studies supported gendered stereotypes, such as men interrupting more than women and women talking more than men, recent research has found mixed evidence of gender-specific conversational strategies, and few overarching patterns have emerged.
-                <br><br>
-                another cue associated with turn-taking is that of timing. within turn-taking, timing may cue the hearer to know that they have a turn to speak or make an utterance. due to the very nature of turn-taking and that it is dependent on the context, timing varies within a turn and may be subjective within the conversation. vocal patterns, such as pitch, specific to the individual also cue the hearer to know how the timing will play out in turn-taking.
-    
-                deborah tannen also shows timing differences in relation to turn-taking. for a particular study, she used a recording of a conversation between a group of her friends at dinner. the group included men and women from across the united states of mixed ethnicities. she concluded that while the amount of space left between speakers may differ, it differs most dramatically between people from different regions. for instance, new yorkers tend to overlap in conversation, while californians tend to leave more space between turns and sentences.
-    
-                kobin h. kendrick argues that rules and constraints that are established within a turn-taking system are done so to minimize the amount of time spent transitioning between turns. not all transitions are minimal; schlegloff found that transitions before turns that incorporate other-initiations of repair were found to be longer than other transitions.
-            </p>
+        <div class="turn-taking-container">
+            <div class="turn-taking-wrapper">
+                <div class="type-test">
+                    <div class="edit-text" contenteditable="plaintext-only">
+                        <h1>reservation sans<br>is a variable typeface with a tension axis.</h1>
+                        <p>tension in turn-taking refers to the underlying interpersonal and structural dynamics that emerge during the negotiation of conversational turns. turn-taking is a foundational mechanism in spoken interaction, where participants alternate speaking roles in a manner that minimizes overlap and gaps. tension often manifests when conversational norms are challenged, such as through interruptions, delayed responses, or simultaneous speech, which can signal underlying power asymmetries, cultural variations in communicative practices, or heightened emotional states. these disruptions create moments of interactional instability that require negotiation to restore conversational equilibrium. the study of tension in turn-taking provides insight into the pragmatics of conversation, highlighting how individuals navigate social relationships, manage alignment, and maintain discourse coherence in real time.</p>
+                    </div>
+                    <input class="slider" name="tension" type="range" min="1" max="500" value="0" oninput="setTension(this.value)">
+                </div>
+            </div>
+            <div class="flex-container">
+                <div class="grid-container">
+                </div>
+                <div class="hover-container">
+                    <div class="hover-char"></div>
+                </div>
+            </div>
         </div>
         <!-- <div class="wghtValueDisplay">awkwardness...</div>   -->
-        <!-- <div class="flex-container">
-            <div class="grid-container">
-            </div>
-            <div class="hover-container">
-                <div class="hover-char"></div>
-            </div>
-        </div> -->
     </div>
     <script>
+        const editText = document.querySelector('.edit-text');
+
+        function setTension(newTension) {
+            const textElements = editText.querySelectorAll('h1, p');
+            textElements.forEach(element => {
+                element.style.fontVariationSettings = `'wght' ${newTension}`;
+            });
+        }
+
         //conversation
-        const conversation = document.getElementById('conversation');
+        const conversation = document.getElementById('texts');
 
         //"your" messages
         const responses = [
@@ -251,7 +402,7 @@
             "your tone is weird",
             "are you anxious",
             "ok",
-            "mm",
+            "nvm",
             "let's just talk later"
         ];
 
@@ -294,7 +445,7 @@
 
                     //refocus on the new input bubble
                     newInput.focus();
-                }, 1000);
+                }, 2000);
             }
         }
 
@@ -355,7 +506,6 @@
 
         //all letters
         const ranges = [
-            [65, 90], //capital letters
             [97, 122], //lowercase letters
             [48, 57], //numbers
         ];

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Text, Typing, Transcendence</title>
+    <style>
+        @font-face{
+            font-family:"pantasia";
+            src: url(pantasia.otf);
+        }
+
+        ::selection{
+            background:black;
+            color:white;
+        }
+
+        p{
+            /* background-color:rgba(0, 0, 0, 0.5);
+            color:white; */
+            font-size:12px;
+        }
+
+        h1{
+            line-height:10px;
+            margin-bottom:0px;
+        }
+
+        h2{
+            margin-top:0px;
+        }
+
+        body{
+            font-family:'Times New Roman', Times, serif;
+        }
+
+        .title-container{
+            position:fixed;
+            width:50vw;
+        }
+
+        .title-wrapper{
+
+        }
+
+        .course-description{
+            height:200px;
+            overflow-y:scroll;
+        }
+
+        .schedule{
+            /* background-color:white; */
+            width:500px;
+            transform:rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+            transition:all 2s cubic-bezier(.43,0,.09,.99);
+            perspective:200px;
+        }
+
+        .schedule:hover{
+            transform:rotateY(0deg) rotateX(0deg) rotateZ(0deg);
+        }
+
+        .two-column{
+            display:flex;
+            flex-direction:row;
+        }
+
+        #arena{
+            position:fixed;
+            transition:all 2s cubic-bezier(.43,0,.09,.99);
+            border:1px solid black;
+            transform: rotateY(45deg) rotateX(60deg);
+            z-index:-1;
+            margin-top:-204px;
+        }
+    </style>
+</head>
+<body>
+    <div class="title-container">
+        <div class="title-wrapper">
+            <h1>Text, Typing, Transcendence</h1>
+            <br>
+            <h2><i>The New Poetics of Digital Communication</i></h2>
+            <div class="course-description">
+                <p>
+                    In an age dominated by digital communication, how has technology transformed the way we use language to connect across distances, express nuance and emotion, and shape our fluid identities? Existing in the continuous feed of social media, the back and forth exchanges of text conversations, and the intimate spaces of personal notes, digital text has foregrounded the poetics of language into our everyday interactions. Emojis, tone indicators, shorthand forms, and typographic treatments continue to push the boundaries of our linguistic expression. Weightless, digital text transforms language into a malleable substance, allowing identities and expressions to shift and evolve more dynamically than ever, further sculpted by the fluidity of the internet. Yet, unlike speech or printed text, digital language exists in tension with the web's impermanence—endlessly replicable and shareable, yet perpetually on the brink of erasure, fragile and fleeting. How has this tension altered the ways we communicate and process our relationships and communities? How do the constraints and possibilities of digital platforms shape not only our language but our very identities?
+                    <br><br>
+                    Through the lens of digital linguistics, this independent study project examines how technology empowers us to use language as a dynamic tool for connection, creativity, and identity formation. In a culture that blurs casual conversation and poetic expression, digital language thrives as a site of linguistic hybridity and mutualistic influence, bending to fit the unique constraints of our digital spaces. As language compresses, abstracts, and shifts in response to algorithms, platforms, and social contexts, how do we make sense of our interactions and expressions? By engaging with early works in computational poetics, internet language studies, and digital ethnographic research, this project is an linguistic anthropological investigation into our relationship with technology, language, and with each other—how this evolving connection is both a catalyst for language’s transformation and, perhaps, a reflection of shifting relationships between people themselves. In a world where typing and text are the primary conduits of connection, how does language bring intimacy within the reach of our fingers, while also revealing the distance that lingers beneath our digital conversations, and between us?
+                </p>
+            </div>
+        </div>
+    </div>
+    <iframe id="arena" src="https://www.are.na/ryan-yan/new-poetics-of-digital-communication" width="100%" height="2000px" frameborder="0"></iframe>
+    <div class="schedule">
+        <div class="two-column">
+            <div class="week">
+                <p>Week 1</p>
+                <h2>Intro to Digital Linguistics: Spoken, Printed, Pixelated</h2>
+            </div>
+            <div class="content">
+                <p>
+                    This foundational week explores the basics of linguistics—phonetics, syntax, semantics, and pragmatics—and assesses how these tools are equipped (or unprepared) to handle the complexities of digital language. We’ll discuss how digital contexts like hyperlinking, indexing, and ephemeral text impact traditional linguistic concepts, examining how digital language compares with spoken and printed forms. How does digital communication introduce new linguistic qualities and how can we adapt our analytical framework to better interpret the nuances of online language? This week sets the groundwork for understanding digital language’s unique structures and challenges as the foundations of our research for the next few weeks.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="schedule">
+        <h2>Digital Formalities: Nuances, Constraints, and Adaptation</h2>
+        <p>
+            Despite the lack nonverbal cues in digital communications, we have developed various conventions to convey tone, intent, and emotion. This week, we explore how elements like tone indicators, emojis, and typographic treatment of text bring nuance to digital interactions, and how these conventions are shaped by the platform-specific constraints of online spaces. What are the origins of these conventions and how have they seeped into our social frameworks? From character limits to algorithmic censorship, digital constraints compel users to adapt language creatively, using shorthand, abbreviations, and pictographic metaphors to communicate effectively. We’ll examine how these limitations impact meaning and how the tension between brevity and nuance limits, compresses, and ultimately gives life to new linguistic expressions.
+        </p>
+    </div>
+    <div class="schedule">
+        <h2>Text in Time: Memory and Temporality</h2>
+        <p>
+            Copying and pasting pre-written text, editing a post, or correcting a typo—digital text exists in a unique space between impermanence and preservation. This week, we explore how digital tools like cloud storage, notes apps, and social media shape our experience of writing and memory, granting us more agency over how language interacts with time. We’ll analyze how ephemeral practices such as unsending, ghosting, archiving, and temporary posts influence interpersonal relationships and how the persistence of digital footprints impacts privacy, identity, and cultural continuity. How do asynchronous interactions like typing indicators and read receipts shape conversational flow and interpretation? Comparing these digital cues to linguistic features such as turn-taking and back-channeling, we’ll investigate how time and memory reshape engagement and social dynamics in the digital age.
+        </p>
+    </div>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const scheduleElements = document.querySelectorAll('.schedule');
+
+            scheduleElements.forEach((element) => {
+                const rotateX = Math.floor(Math.random() * 91) - 45;
+                const rotateY = Math.floor(Math.random() * 91) - 45;
+                const rotateZ = Math.floor(Math.random() * 91) - 45;
+
+                //store  randomized transform into dataset property
+                element.dataset.rotate = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) rotateZ(${rotateZ}deg)`;
+
+                //apply the initial random transform
+                setTimeout(() => {
+                    element.style.transform = element.dataset.rotate;
+                }, 100);
+
+                //add event listeners for hover
+                element.addEventListener('mouseover', () => {
+                    element.style.transform = 'rotateY(0deg) rotateX(0deg) rotateZ(0deg)';
+                });
+
+                element.addEventListener('mouseout', () => {
+                    element.style.transform = element.dataset.rotate;
+                });
+            });
+        });
+    </script>
+</body>
+</html>
